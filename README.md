@@ -236,7 +236,7 @@ Not like this (Powershell):
 
 # 6. **Configure Training File**
 
-1. Open the train_cnn_v3.py file
+1. Open the MLFLOW.ipynb file
 2. Update the dataset paths to where you installed them, for example:
 
    ![FilePaths](setup_images/image-2.png)
@@ -245,15 +245,30 @@ Not like this (Powershell):
 
 # 7. **Run the Training Script**
 
-1. Navigate to the correct directory:
-   ```
-   cd redshift_estimation
-   ```
+1. Navigate to the MLFLOW.ipynb and run each cell
 
-2. Start training:
-   ```
-   python train_cnn_v3.py --image_size 64 --epochs 200 --batch_size 256 --learning_rate 0.0001
-   ```
+2. Troubleshooting:
+   If when you try to execute the cells a popup like this appears: 
+
+   ![Extensions](setup_images/image22.png)
+   
+   That means that you do not have the required VSCode extensions installed. 
+
+   * Select "Browse marketplace for kernel extensions"
+   * Then install "Jupyter" (By Microsoft)
+
+   ![Extensions2](setup_images/image23.png)
+
+   
+   *  Now go back to the notebook and try to run the cells again, and then select "Python Environments" when this pops up
+
+   ![Environment](setup_images/image24.png)
+
+   * Finally, select the environment you created earlier (example: tf210)
+
+   ![Environment2](setup_images/image25.png)
+
+   * Note: If Windows firewall gives you a warning, select "allow all access"
 
 ### Training Parameters:
 - **--image_size**: Set to 64 or 127 depending on the dataset you downloaded
@@ -261,7 +276,7 @@ Not like this (Powershell):
 - **--batch_size**: Number of samples per training batch (default: 256)
 - **--learning_rate**: Learning rate for training (default: 0.0001)
 
-Training progress will be displayed in the terminal, including loss values and other metrics. Checkpoints will be saved automatically during training. If using TensorBoard, logs will be available in /data2/logs/. Once training is complete, the trained model weights will be stored in /data2/models/.
+Training progress will be displayed in the notebook as well as loss values and other metrics. Checkpoints will be saved automatically during training.
 
 
 
