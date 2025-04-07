@@ -276,7 +276,15 @@ Not like this (Powershell):
 - **--batch_size**: Number of samples per training batch (default: 256)
 - **--learning_rate**: Learning rate for training (default: 0.0001)
 
-Training progress will be displayed in the notebook as well as loss values and other metrics. Checkpoints will be saved automatically during training.
+Training progress will be displayed in the notebook as well as loss values and other metrics. Checkpoints will be saved automatically during training. You can run the notebook as many times as you'd like with various parameters.
+
+After training is complete, navigate to MLFLOWUI.ipynb and simply run each cell. Adjust the file path for the mlruns directory if you changed it from the default in the MLFLOW.ipynb notebook:
+
+```
+mlruns_dir = os.path.abspath("mlruns").replace("\\", "/")
+```
+By running the cells, it will automatically launch a MLFlow local server UI that will display information about each run
+
 
 
 
@@ -495,7 +503,19 @@ If you just have empty brackets "[ ]" it indicated Cuda has not been successfull
 
 ## Training the CNN
  
- * Now you will need to adjust the paths in the train_cnn_v3.py script to where you have installed the datasets, for example:
+ * Now it is time to create a Python kernel for our galaxies environment. Make sure you have ipykernel installed in that enviornment, then in the terminal type:
+ 
+```
+python -m ipykernel install --user --name galaxies --display-name "Python (galaxies)"
+```
+This will register a new kernel called "Python (galaxies)" that you can select when launching a notebook in Jupyter. 
+
+* Shut down all jupyter kernels and restart, and then you should see "galaxies" listed as an option in the kernel list 
+
+![Kernel](setup_images/Linux7.png)
+
+
+Now you will need to adjust the paths in the MLFLOW.ipynb notebook to where you have installed the datasets, for example:
 
  ![Paths](setup_images/Datasets.PNG)
 
@@ -507,12 +527,10 @@ If you just have empty brackets "[ ]" it indicated Cuda has not been successfull
 - **--batch_size**: Number of samples per training batch (default: 256)
 - **--learning_rate**: Learning rate for training (default: 0.0001)
 
- * Save the file, then go back to your terminal
+ * Save the file, then run each cell in the notebook.
  
- Type:
+Training progress will be displayed, and once training is complete you can optionally run the notebook again with different parameters to compare performance across different runs. 
 
- ```
- python train_cnn_v3.py
-```
- 
-Training progress will be displayed in the terminal, including loss values and other metrics. Checkpoints will be saved automatically during training to the specified directory (default:data2/) 
+* When you are ready to evaluate the performance of the model, navigate to the MLFLOWUI.ipynb notebook (make sure to select galaxies kernel once again) and run each cell. 
+
+*Note:*  If running on an altair server, change the link from "localhost" to "altair" but keep everything else the same including the port number  
