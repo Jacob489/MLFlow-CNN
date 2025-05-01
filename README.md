@@ -14,7 +14,6 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
     - [Evaluation/Inference Configuration](#evaluationinference-configuration)
   - [Prerequisites](#prerequisites)
   - [Dataset Download](#dataset-download)
-  - [Installation Steps](#installation-steps)
     - [Windows Instructions](#windows-instructions)
       1. [Clone the GitHub Repository](#1-clone-the-github-repository)
       2. [Install Miniconda](#2-install-miniconda)
@@ -79,6 +78,8 @@ You will need do download the datasets from the link above (5x127x127 or 5x64x64
 - 5x64x64_training_with_morphology.hdf5
 - 5x64x64_validation_with_morphology.hdf5
 - 5x64x64_testing_with_morphology.hdf5
+ 
+# Windows Instructions
 
 ## **Prerequisites**:
 
