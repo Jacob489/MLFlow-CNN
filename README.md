@@ -79,7 +79,7 @@ You will need do download the datasets from the link above (5x127x127 or 5x64x64
 - 5x64x64_validation_with_morphology.hdf5
 - 5x64x64_testing_with_morphology.hdf5
  
-# Windows Instructions
+# Windows Instructions:
 
 ## **Prerequisites**:
 
