@@ -16,31 +16,30 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
       - [Evaluation/Inference Configuration](#evaluationinference-configuration)
   - [Prerequisites](#prerequisites)
   - [Installation Steps](#installation-steps)
+    
     - [Windows Installation](#windows-installation)
       1. [Clone the Github Repository](#1-clone-the-github-repository)
       2. [Install Miniconda](#2-install-miniconda)
       3. [Miniconda Environment Creation](#3-miniconda-environment-creation)
-      4. [Miniconda Environment Activation/GPU Installation](#4-miniconda-environment-activationgpu-installation)
+      4. [Miniconda Environment Activation/CUDA Installation](#4-miniconda-environment-activationcuda-installation)
       5. [Install Dependencies](#5-install-dependencies)
       6. [Configure Training File](#6-configure-training-file)
       7. [Run the Training Script](#7-run-the-training-script)
-
-      - [Linux Instructions](#linux-instructions)
-
+         
+    - [Linux Instructions](#linux-instructions)
       1. [Check Prerequisites](#check-prerequisites)
          - [Open Terminal](#open-terminal)
          - [Install Git](#install-git)
          - [Check/Install GPU Drivers](#checkinstall-gpu-drivers)
-      2. [Install Miniconda](#install-miniconda)
-      3. [Create and Activate Conda Environment](#create-and-activate-conda-environment)
-      4. [Install CUDA and cuDNN](#install-cuda-and-cudnn)
-      5. [Clone the Repository](#clone-the-repository)
-      6. [Install Requirements](#install-requirements)
-      7. [Configure and Run Training](#configure-and-run-training)
-        - [Training Parameters](#training-parameters)
+      2. [Installing Miniconda](#installing-miniconda)
+      3. [Cloning the Repository](#cloning-the-repository)
+      4. [Installing Requirements](#installing-requirements)
+      5. [Training the CNN](#training-the-cnn)
+      6. [Explore Model Performance with MLFlow](#explore-model-performance-with-mlflow)
+
 ## Setup Instructions
 > **Disclaimer**: These instructions are designed for Windows and Linux, this code is incompatible with MAC.
-#windows-installation
+ 
 ### **System Requirements**:
 
 ## Hardware Requirements
