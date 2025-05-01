@@ -9,38 +9,30 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 
 # Table of Contents
 - [Setup Instructions](#setup-instructions)
-  - [Hardware/System Requirements](#hardware-requirements)
-     - [Training Configuration](#training-configuration)
-      - [Evaluation/Inference Configuration](#evaluationinference-configuration)
+  - [System Requirements](#system-requirements)
+    - [Training Configuration](#training-configuration)
+    - [Evaluation/Inference Configuration](#evaluationinference-configuration)
   - [Prerequisites](#prerequisites)
+  - [Dataset Download](#dataset-download)
   - [Installation Steps](#installation-steps)
-    
-    - [Windows Installation](#windows-installation)
-      1. [Clone the Github Repository](#1-clone-the-github-repository)
+    - [Windows Instructions](#windows-instructions)
+      1. [Clone the GitHub Repository](#1-clone-the-github-repository)
       2. [Install Miniconda](#2-install-miniconda)
-      3. [Miniconda Environment Creation](#3-miniconda-environment-creation)
-      4. [Miniconda Environment Activation/CUDA Installation](#4-miniconda-environment-activationcuda-installation)
+      3. [Create Miniconda Environment](#3-miniconda-environment-creation)
+      4. [Activate Environment and Install CUDA](#4-miniconda-environment-activationcuda-installation)
       5. [Install Dependencies](#5-install-dependencies)
       6. [Configure Training File](#6-configure-training-file)
       7. [Run the Training Script](#7-run-the-training-script)
-         
     - [Linux Instructions](#linux-instructions)
       1. [Check Prerequisites](#check-prerequisites)
-         - [Open Terminal](#open-terminal)
-         - [Install Git](#install-git)
-         - [Check/Install GPU Drivers](#checkinstall-gpu-drivers)
-      2. [Installing Miniconda](#installing-miniconda)
-      3. [Cloning the Repository](#cloning-the-repository)
-      4. [Installing Requirements](#installing-requirements)
-      5. [Training the CNN](#training-the-cnn)
-      6. [Explore Model Performance with MLFlow](#explore-model-performance-with-mlflow)
+      2. [Install Miniconda](#installing-miniconda)
+      3. [Clone the Repository](#cloning-the-repository)
+      4. [Install Requirements](#installing-requirements)
+      5. [Train the CNN](#training-the-cnn)
+      6. [Explore Model Performance with MLflow](#explore-model-performance-with-mlflow)
 
-## Setup Instructions
+
 > **Disclaimer**: These instructions are designed for Windows and Linux, this code is incompatible with MAC.
- 
-### **System Requirements**:
-
-## Hardware Requirements
 
 ### System Requirements
 ```
@@ -51,7 +43,7 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 
 ### Training Configuration
 
-#### Minimum Specifications
+#### Minimum Hardware Specifications
 ```
 | Component | Requirement                                     |
 |-----------|------------------------------------------------|
@@ -60,7 +52,7 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 | RAM       | 8GB DDR4 (16GB recommended)                    |
 ```
 
-#### Recommended Specifications
+#### Recommended Hardware Specifications
 ```
 | Component | Requirement                                     |
 |-----------|------------------------------------------------|
@@ -80,7 +72,7 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 
 > **Note**: The application uses GPU memory management and data generators to optimize resource utilization. Performance may vary based on specific hardware configurations and concurrent system load. 
 
-# **Prologue**: *Setting Everything Up*
+## Dataset Download
 
 You will need do download the datasets from the link above (5x127x127 or 5x64x64):
 
