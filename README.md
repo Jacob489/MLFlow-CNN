@@ -212,11 +212,16 @@ Not like this (Powershell):
 # 5. **Install Dependencies**
 
 1. Install requirements:
+   Make sure pip is installed in your conda environment:
+   ```conda install pip
    ```
-   pip install -r requirements.txt
+   Install requirements:
+   
+   ```pip install -r requirements.txt
    ```
+   
 
-2. Verify CUDA installation:
+3. Verify CUDA installation:
    ```
    python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
    ```
