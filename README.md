@@ -9,9 +9,8 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 
 # Table of Contents
 - [Setup Instructions](#setup-instructions)
-  - [System Requirements](#system-requirements)
-    - [Hardware Requirements](#hardware-requirements)
-      - [Training Configuration](#training-configuration)
+  - [Hardware/System Requirements](#hardware-requirements)
+     - [Training Configuration](#training-configuration)
       - [Evaluation/Inference Configuration](#evaluationinference-configuration)
   - [Prerequisites](#prerequisites)
   - [Installation Steps](#installation-steps)
