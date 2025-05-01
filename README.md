@@ -5,7 +5,7 @@ GalaxiesML is a dataset for use in machine learning in astronomy. This repositor
 The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.11117528](https://doi.org/10.5281/zenodo.11117528)**.
 
 # CNN with MLFlow using GalaxiesML
-- An MLflow-integrated CNN that leverages GalaxiesML’s multi-filter galaxy images alongside structural features to estimate photometric redshift.”
+- Below is an MLflow-integrated CNN that leverages GalaxiesML’s multi-filter galaxy images alongside structural features to estimate photometric redshift.
 
 # Table of Contents
 
