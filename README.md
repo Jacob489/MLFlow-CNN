@@ -8,7 +8,6 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 - Redshift estimation - example of redshift estimation using photometry with a fully connected neural network and with images using a convolutional neural network (CNN)
 
 # Table of Contents
-- [Examples](#examples)
 - [Setup Instructions](#setup-instructions)
   - [System Requirements](#system-requirements)
     - [Hardware Requirements](#hardware-requirements)
