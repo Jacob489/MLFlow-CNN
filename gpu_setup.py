@@ -11,7 +11,7 @@ os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')
 logging.getLogger('tensorflow').setLevel(logging.ERROR)
 try:
     import absl.logging as absllogging
-    absllogging.set_verbosity(absllogging.ERROR)  # Fixed line
+    absllogging.set_verbosity(absllogging.ERROR)   
 except ImportError:
     pass
 # Configure environment for CUDA and TensorFlow GPU growth:
@@ -57,7 +57,7 @@ import tensorflow.compat.v1 as tf
 #     tf.disable_v2_behavior()
 # except Exception:
 #     pass
-# Try to enable eager execution
+ 
 try:
     tf.enable_eager_execution()
 except Exception as e:
