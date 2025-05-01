@@ -11,9 +11,11 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 
   - [System Requirements](#system-requirements)
     - [Training Configuration](#training-configuration)
+      
     - [Evaluation/Inference Configuration](#evaluationinference-configuration)
   - [Prerequisites](#prerequisites)
   - [Dataset Download](#dataset-download)
+    
     - [Windows Instructions](#windows-instructions)
       1. [Clone the GitHub Repository](#1-clone-the-github-repository)
       2. [Install Miniconda](#2-install-miniconda)
@@ -25,12 +27,11 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
       8. [Exploring Your Model Results with MLflow](#8-exploring-your-model-results-with-mlflow)
 
     - [Linux Instructions](#linux-instructions)
-      1. [Check Prerequisites](#check-prerequisites)
-      2. [Install Miniconda](#installing-miniconda)
-      3. [Clone the Repository](#cloning-the-repository)
-      4. [Install Requirements](#installing-requirements)
-      5. [Train the CNN](#training-the-cnn)
-      6. [Explore Model Performance with MLflow](#explore-model-performance-with-mlflow)
+      1. [Install Miniconda](#installing-miniconda)
+      2. [Clone the Repository](#cloning-the-repository)
+      3. [Install Requirements](#installing-requirements)
+      4. [Train the CNN](#training-the-cnn)
+      5. [Explore Model Performance with MLflow](#explore-model-performance-with-mlflow)
 
 
 > **Disclaimer**: These instructions are designed for Windows and Linux, this code is incompatible with MAC.
@@ -286,8 +287,6 @@ This powerful interface lets you analyze your model's behavior, identify improve
 
 
 # Linux instructions:
-
-## Check Prerequisites:
 
 ## Open Terminal
 * Press Ctrl + Alt + T to open a terminal window
