@@ -1,0 +1,31 @@
+name: galaxies
+channels:
+  - conda-forge
+dependencies:
+  # Core & GPU runtimes
+  - python=3.10
+  - cudatoolkit=11.2
+  - cudnn=8.1
+
+  # Scientific stack & MLflow
+  - numpy=1.23.5
+  - pandas=1.5.3
+  - matplotlib=3.6.3
+  - scipy=1.10.1
+  - seaborn=0.12.2
+  - h5py=3.8.0
+  - astropy=5.2.2
+  - tqdm=4.65.0
+  - tabulate=0.9.0
+  - scikit-learn=1.2.2
+  - mlflow
+  - ipykernel
+  - protobuf=3.19.6
+
+  # Fallback to pip for GPU-only wheels
+  - pip
+  - pip:
+    - tensorflow==2.10.1
+    - tensorflow-probability==0.17.0
+    - keras
+    - tensorboard==2.10.1
