@@ -24,7 +24,9 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
       5. [Install Dependencies](#5-install-dependencies)
       6. [Configure Training File](#6-configure-training-file)
       7. [Run the Training Script](#7-run-the-training-script)
-    - [Linux Installation](#linux-installation)
+
+      - [Linux Instructions](#linux-instructions)
+
       1. [Check Prerequisites](#check-prerequisites)
          - [Open Terminal](#open-terminal)
          - [Install Git](#install-git)
@@ -38,7 +40,7 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
         - [Training Parameters](#training-parameters)
 ## Setup Instructions
 > **Disclaimer**: These instructions are designed for Windows and Linux, this code is incompatible with MAC.
-
+#windows-installation
 ### **System Requirements**:
 
 ## Hardware Requirements
@@ -93,7 +95,6 @@ You will need do download the datasets from the link above (5x127x127 or 5x64x64
 
 - Visual Studio Code installed
 - GIT installed
-- MiniConda Installed (Miniconda3-py310_24.9.2-0)
 
 # 0. **Install GIT**
 
@@ -178,9 +179,9 @@ Not like this (Powershell):
 
 5. Create the environment by typing:
    ```
-   C:\Users\YourUsername\miniconda3\Scripts\conda.exe create -n tf210 python=3.10
+   C:\Users\username\miniconda3\Scripts\conda.exe create -n tf210 python=3.10
    ```
-   - Replace "YourUsername" with your actual username
+   - Replace "username" with your actual username on your system
    - Adjust path if Miniconda is installed elsewhere
 
 6. Type "y" when prompted:
@@ -204,7 +205,7 @@ Not like this (Powershell):
    ```
    or
    ```
-   C:\Users\YourUsername\miniconda3\Scripts\conda.exe activate tf210
+   C:\Users\uername\miniconda3\Scripts\conda.exe activate tf210
    ```
 
 5. Install CUDA and cuDNN:
@@ -384,7 +385,7 @@ It will say something like:
 "Confirm the installation location: 
 
 Miniconda3 will now be installed into this location:
-/home/your_username/miniconda3
+/home/username/miniconda3
 
   - Press ENTER to confirm the location
   - Press CTRL-C to abort the installation
