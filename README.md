@@ -383,7 +383,7 @@ It will say something like:
 "Confirm the installation location: 
 
 Miniconda3 will now be installed into this location:
-/home/username/miniconda3
+/home/<username>/miniconda3
 
   - Press ENTER to confirm the location
   - Press CTRL-C to abort the installation
