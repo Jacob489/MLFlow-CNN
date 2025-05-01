@@ -250,7 +250,7 @@ Not like this (Powershell):
 3. Save the file (CTRL + S)
 
 # 7 **Setup Kernel**
-1. While in your terminal with the activated conda environent (tf10) type:
+1. While in your terminal with the activated conda environent (tf210) type:
 
    ```
    pip install ipykernel
@@ -259,7 +259,7 @@ Not like this (Powershell):
 
 2. Next you will need to register the kernel. Type:
    ```
-   python -m ipykernel install --user --name tf10 --display-name "Python (tf10)" 
+   python -m ipykernel install --user --name tf210 --display-name "Python (tf210)" 
    ``` 
    (type "y" when prompted)
 
