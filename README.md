@@ -171,9 +171,9 @@ Not like this (Powershell):
 
 5. Create the environment by typing:
    ```
-   C:\Users\username\miniconda3\Scripts\conda.exe create -n tf210 python=3.10
+   C:\Users\<username>\miniconda3\Scripts\conda.exe create -n tf210 python=3.10
    ```
-   - Replace "username" with your actual username on your system
+   - Replace "<username>" with your actual username on your system
    - Adjust path if Miniconda is installed elsewhere
 
 6. Type "y" when prompted:
@@ -197,7 +197,7 @@ Not like this (Powershell):
    ```
    or
    ```
-   C:\Users\uername\miniconda3\Scripts\conda.exe activate tf210
+   C:\Users\<username>\miniconda3\Scripts\conda.exe activate tf210
    ```
 
 5. Install CUDA and cuDNN:
@@ -213,11 +213,14 @@ Not like this (Powershell):
 
 1. Install requirements:
    Make sure pip is installed in your conda environment:
-   ```conda install pip
    ```
+   conda install pip
+   ```
+    
    Install requirements:
    
-   ```pip install -r requirements.txt
+   ```
+   pip install -r requirements.txt
    ```
    
 
