@@ -1,4 +1,4 @@
-# GalaxiesML Example
+# GalaxiesML Example:
 
 GalaxiesML is a dataset for use in machine learning in astronomy. This repository contains an example of how the GalaxiesML dataset can be used. 
 
