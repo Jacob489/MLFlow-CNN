@@ -395,7 +395,7 @@ Miniconda3 will now be installed into this location:
 * As the message indicates, you can choose to paste a separate path or press enter to confirm the current default installation location. Type the full path to the directory you made earlier (CNNSoftware)
  
 * Once it is done it should say: 
-
+```
    Preparing transaction: done
 
    Executing transaction: done
@@ -411,7 +411,7 @@ Miniconda3 will now be installed into this location:
    conda config --set auto_activate_base false
 
    You can undo this by running `conda init --reverse $SHELL`? [yes|no]
-
+```
 * When prompted, type “yes” into the terminal. 
  
  
