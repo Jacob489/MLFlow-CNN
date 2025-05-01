@@ -9,28 +9,32 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
 
 # Table of Contents
 
-  - [System Requirements](#system-requirements)
-  - [Training Configuration](#training-configuration)
-  - [Evaluation/Inference Configuration](#evaluationinference-configuration)
-  - [Prerequisites](#prerequisites)
-  - [Dataset Download](#dataset-download)
-      
-  - [Windows Instructions](#windows-instructions)
-    1. [Clone the GitHub Repository](#1-clone-the-github-repository)
-    2. [Install Miniconda](#2-install-miniconda)
-    3. [Create Miniconda Environment](#3-miniconda-environment-creation)
-    4. [Activate Environment and Install CUDA](#4-miniconda-environment-activationcuda-installation)
-    5. [Install Dependencies](#5-install-dependencies)
-    6. [Configure Training File](#6-configure-training-file)
-    7. [Run the Training Script](#7-run-the-training-script)\
-    8. [Exploring Your Model Results with MLflow](#8-exploring-your-model-results-with-mlflow)
+- [System Requirements](#system-requirements)
+- [Training Configuration](#training-configuration)
+- [Evaluation/Inference Configuration](#evaluationinference-configuration)
+- [Prerequisites](#prerequisites)
+- [Dataset Download](#dataset-download)
+  
+- [Windows Instructions](#windows-instructions)
+  0. [Install Git](#0-install-git)
+  1. [Clone the GitHub Repository](#1-clone-the-github-repository)
+  2. [Install Miniconda](#2-install-miniconda)
+  3. [Create Miniconda Environment](#3-miniconda-environment-creation)
+  4. [Activate Environment and Install CUDA](#4-miniconda-environment-activationcuda-installation)
+  5. [Install Dependencies](#5-install-dependencies)
+  6. [Configure Training File](#6-configure-training-file)
+  7. [Run the Training Script](#7-run-the-training-script)
+  8. [Exploring Your Model Results with MLflow](#8-exploring-your-model-results-with-mlflow)
 
-  - [Linux Instructions](#linux-instructions)
-    1. [Install Miniconda](#installing-miniconda)
-    2. [Clone the Repository](#cloning-the-repository)
-    3. [Install Requirements](#installing-requirements)
-    4. [Train the CNN](#training-the-cnn)
-    5. [Explore Model Performance with MLflow](#explore-model-performance-with-mlflow)
+- [Linux Instructions](#linux-instructions)
+  1. [Install Git](#install-git-1)
+  2. [Check/install GPU drivers](#checkinstall-gpu-drivers)
+  3. [Install Miniconda](#installing-miniconda)
+  4. [Clone the Repository](#cloning-the-repository)
+  5. [Install Requirements](#installing-requirements)
+  6. [Train the CNN](#training-the-cnn)
+  7. [Explore Model Performance with MLflow](#explore-model-performance-with-mlflow)
+
 
 
 > **Disclaimer**: These instructions are designed for Windows and Linux, this code is incompatible with MAC.
