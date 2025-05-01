@@ -13,8 +13,8 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
     - [Training Configuration](#training-configuration)
     - [Evaluation/Inference Configuration](#evaluationinference-configuration)
       
-  - [Prerequisites](#prerequisites)
-  - [Dataset Download](#dataset-download)
+    - [Prerequisites](#prerequisites)
+    - [Dataset Download](#dataset-download)
     
     - [Windows Instructions](#windows-instructions)
       1. [Clone the GitHub Repository](#1-clone-the-github-repository)
