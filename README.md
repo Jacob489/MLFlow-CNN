@@ -21,7 +21,9 @@ The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.
       4. [Activate Environment and Install CUDA](#4-miniconda-environment-activationcuda-installation)
       5. [Install Dependencies](#5-install-dependencies)
       6. [Configure Training File](#6-configure-training-file)
-      7. [Run the Training Script](#7-run-the-training-script)
+      7. [Run the Training Script](#7-run-the-training-script)\
+      8. [Exploring Your Model Results with MLflow](#8-exploring-your-model-results-with-mlflow)
+
     - [Linux Instructions](#linux-instructions)
       1. [Check Prerequisites](#check-prerequisites)
       2. [Install Miniconda](#installing-miniconda)
@@ -269,7 +271,7 @@ Not like this (Powershell):
 
 Training progress will be displayed in the notebook as well as loss values and other metrics. Checkpoints will be saved automatically during training. You can run the notebook as many times as you'd like with various parameters.
 
-## Exploring Your Model Results with MLflow
+# 8. **Exploring Your Model Results with MLflow**
 After training completes, run the "MLflow UI Startup Helper" cell to generate interactive links to the MLflow dashboard. Simply click the most appropriate link for your environment (typically the localhost option) to launch the visualization interface.
 The MLflow dashboard provides:
 
