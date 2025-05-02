@@ -1,11 +1,29 @@
-# GalaxiesML Example:
+# Galaxy Redshift Estimation Using Convolutional Neural Networks with MLflow Tracking
+## Abstract
+### Creators:
 
-GalaxiesML is a dataset for use in machine learning in astronomy. This repository contains an example of how the GalaxiesML dataset can be used. 
+* Jacob Nowack
+* Srinath Saikrishnan
+* Vikram Seenivasan
+* Tuan Do
+* Bernie Boscoe
+* Zhuo Chen
+* Chandler Campbell
 
-The dataset is publicly available on **Zenodo** with the DOI: **[10.5281/zenodo.11117528](https://doi.org/10.5281/zenodo.11117528)**.
+**UCLA Astrophysics Datalab**
+ 
+## Description
 
-# CNN with MLFlow using GalaxiesML
-Below is an MLflow-integrated CNN that leverages GalaxiesML’s multi-filter galaxy images alongside structural features to estimate photometric redshift.
+Photometric redshift estimation is a critical component in large-scale galaxy surveys, enabling researchers to estimate distances to billions of galaxies without requiring time-intensive spectroscopic measurements. This project implements a dual-input Convolutional Neural Network (CNN) architecture to estimate redshifts using multi-band imaging data (g, r, i, z, y) from the GalaxiesML dataset alongside photometric magnitudes.
+
+Our approach combines two parallel branches: a CNN branch processing 5-channel (g, r, i, z, y) galaxy images at 64×64 pixel resolution, and a fully-connected neural network branch handling numerical features derived from CModel magnitudes in the same five bands. This architecture captures both the spatial morphological information visible in multi-band imaging and the spectral energy distribution information contained in magnitudes to enhance redshift prediction capabilities.
+
+The implementation leverages TensorFlow and MLflow in a local development environment for reproducible experimentation and comprehensive tracking. The model employs a custom HSC loss function implemented directly in the code, tailored for redshift estimation that accounts for the non-Gaussian nature of photometric redshift errors. This function uses the formula L = 1 - 1/(1 + (dz/γ)²) with γ = 0.15, creating a more robust loss that better handles outliers compared to standard mean squared error. The model training also tracks root mean squared error (RMSE) as a secondary metric for performance evaluation.
+
+This notebook provides a complete, reproducible pipeline for training, evaluating, and visualizing galaxy redshift estimation models designed for local installation and execution. A custom HDF5DataGenerator class efficiently loads multi-band galaxy images and associated photometric features from HDF5 files with support for normalization, batch processing, and optional data augmentation. The implementation includes automated experiment tracking through MLflow, model checkpointing for capturing optimal weights during training, and comprehensive artifact collection including training history, visualization plots, and model metadata. Training histories, prediction scatter plots comparing true vs. predicted redshifts, and model architectures are automatically saved and logged to MLflow for analysis. The modular design allows researchers to easily modify network architectures, hyperparameters, and training configurations while maintaining a complete record of experimental results in a controlled local environment.
+
+## Keywords
+Galaxy Redshift Estimation, Convolutional Neural Networks, Deep Learning, MLflow, Machine Learning, Astrophysics, Photometry, TensorFlow
 
 # Table of Contents
 
