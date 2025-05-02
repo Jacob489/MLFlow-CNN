@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software or the accompanying datasets, please cite as below."
+title: "UCLA Astrophysics Datalab MLFlow-CNN"
+version: 0.1.0
+date-released: 2025-05-01
+
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.11117528   
+
+repository-code: "https://github.com/Jacob489/MLFlow-CNN/tree/main"
+url: "https://datalab.astro.ucla.edu/index.html"
+
+authors:
+  - family-names: Do
+    given-names: Tuan   
+
+  - family-names: Saikrishnan
+    given-names: Srinath   
+
+  - family-names: Nowack
+    given-names: Jacob
+
+  - family-names: Vikram
+    given-names: Seenivasan
+
+  - family-names: Boscoe
+    given-names: Bernie
+
+  - family-names: Chen
+    given-names: Zhuo
+
+  - family-names: Campbell
+    given-names: Chandler
+   
+  
+license: MIT
+
+  
+  
