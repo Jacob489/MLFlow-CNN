@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# postBuild
+
+# Register the custom ucla kernel so nbconvert can find it:
+python -m ipykernel install \
+  --user \
+  --name ucla \
+  --display-name "Python (ucla)"
