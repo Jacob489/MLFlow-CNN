@@ -39,7 +39,7 @@ jobs:
         run: docker stop nbtest
 
       - name: Upload executed notebook
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: executed-notebook
           path: executed.ipynb
