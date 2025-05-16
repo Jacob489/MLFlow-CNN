@@ -1,0 +1,45 @@
+name: Test Notebook with repo2docker
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  repo2docker-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install repo2docker & Docker client
+        run: |
+          pip install --upgrade pip
+          pip install jupyter-repo2docker docker
+
+      - name: Build Docker image
+        run: |
+          repo2docker --no-run --image-name notebook-test .
+
+      - name: Run notebook inside container
+        run: |
+          docker run --name nbtest -d notebook-test tail -f /dev/null
+          docker exec nbtest \
+            jupyter nbconvert \
+              --to notebook \
+              --execute MLFLOW.ipynb \
+              --output executed.ipynb \
+              --ExecutePreprocessor.timeout=600
+
+      - name: Stop container
+        run: docker stop nbtest
+
+      - name: Upload executed notebook
+        uses: actions/upload-artifact@v3
+        with:
+          name: executed-notebook
+          path: executed.ipynb
