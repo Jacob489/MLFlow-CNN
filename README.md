@@ -270,7 +270,7 @@ Not like this (Powershell):
 3. Save the file (CTRL + S)
 
 # 7 **Setup Kernel**
-1. While in your terminal with the activated conda environent (tf210) type:
+1. While in your terminal with the activated conda environment (tf210) type:
 
    ```
    pip install ipykernel
