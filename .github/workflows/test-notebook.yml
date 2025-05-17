@@ -23,41 +23,20 @@ jobs:
 
       - name: Build Docker image
         run: |
-          # Use no-run to just build the image
           repo2docker --no-run --image-name notebook-test .
 
       - name: Execute notebook inside container
         run: |
-          # Launch container with explicit memory limits and TF environment variables
-          docker run --name nbtest \
-            --memory=14g \
-            --memory-swap=14g \
-            -e TF_FORCE_GPU_ALLOW_GROWTH=true \
-            -e TF_CPP_MIN_LOG_LEVEL=3 \
-            -e TF_MEMORY_ALLOCATION=1g \
-            -e CUDA_VISIBLE_DEVICES=-1 \
-            -d notebook-test tail -f /dev/null
+          # launch in background
+          docker run --name nbtest -d -e CI=true -e GITHUB_ACTIONS=true notebook-test tail -f /dev/null
 
-          # Print memory inside container
-          docker exec nbtest bash -c 'free -h'
-          
-          # Check Python and TensorFlow versions
-          docker exec nbtest python -c "import sys, tensorflow as tf; print('Python:', sys.version); print('TensorFlow:', tf.__version__)"
-          
-          # Add a special flag file to signal we're in CI
-          docker exec nbtest bash -c 'touch /home/jovyan/.ci_mode'
-          
-          # Create a modified copy of your notebook with reduced epochs and batch size
-          docker exec nbtest bash -c "sed 's/epochs\": 200/epochs\": 1/g; s/batch_size\": 256/batch_size\": 4/g' /home/jovyan/MLFLOW.ipynb > /home/jovyan/MLFLOW_CI.ipynb"
-          
-          # Run with the modified notebook
+          # run & fail fast if any cell errors
           docker exec nbtest \
             jupyter nbconvert \
               --to notebook \
-              --execute /home/jovyan/MLFLOW_CI.ipynb \
+              --execute MLFLOW.ipynb \
               --output executed.ipynb \
-              --ExecutePreprocessor.timeout=600 \
-              --allow-errors
-          
-          # Tear down
+              --ExecutePreprocessor.timeout=600
+
+          # tear down
           docker stop nbtest
