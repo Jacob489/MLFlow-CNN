@@ -1,8 +1,8 @@
 name: Test Notebook with repo2docker
 
+# Option 1: Only run on push events (simplest)
 on:
   push:
-  pull_request:
 
 jobs:
   repo2docker-test:
