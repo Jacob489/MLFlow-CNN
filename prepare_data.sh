@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script runs during repo2docker build to prepare the dataset
+# Script to download and prepare a subset of galaxy data for CI environments
 set -e  # Exit immediately if a command fails
 set -x  # Print each command before executing it
 
@@ -26,12 +26,24 @@ if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ] || [ -n "$BINDER_SERVICE_HOST" ]; th
     echo "Downloading from Zenodo..."
     wget -q --show-progress https://zenodo.org/records/11117528/files/5x64x64_testing_with_morphology.hdf5
     
+    # Examine dataset structure
+    echo "Examining dataset structure before copying..."
+    python -c "
+import h5py
+import numpy as np
+with h5py.File('5x64x64_testing_with_morphology.hdf5', 'r') as f:
+    print('Dataset structure:')
+    for key in f.keys():
+        data = f[key]
+        print(f'Dataset {key}: shape {data.shape}, dtype {data.dtype}')
+"
+    
     # Create copies for train and validation (this is just to make the paths work)
     echo "Creating train/val datasets from test data..."
     cp 5x64x64_testing_with_morphology.hdf5 5x64x64_training_with_morphology.hdf5
     cp 5x64x64_testing_with_morphology.hdf5 5x64x64_validation_with_morphology.hdf5
     
-    echo "Listing files in demo_astrodata:"
+    echo "Verifying dataset copies..."
     ls -la
     
     echo "Dataset preparation complete!"
