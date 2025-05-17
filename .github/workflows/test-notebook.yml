@@ -27,16 +27,43 @@ jobs:
 
       - name: Execute notebook inside container
         run: |
-          # launch in background
-          docker run --name nbtest -d notebook-test tail -f /dev/null
-
-          # run & fail fast if any cell errors
-          docker exec nbtest \
+          # Set environment variables for CI detection
+          docker run --name nbtest -d -e CI=true notebook-test tail -f /dev/null
+          
+          # Debug: check if CI configs were created
+          docker exec nbtest ls -la
+          
+          # Check if CI notebook config exists inside container
+          if docker exec nbtest test -f .ci_notebook_config; then
+            echo "CI notebook config found!"
+            docker exec nbtest cat .ci_notebook_config
+            # Read the notebook name from config
+            NOTEBOOK=$(docker exec nbtest cat .ci_notebook_config | grep NOTEBOOK= | cut -d= -f2)
+            echo "Using notebook: $NOTEBOOK"
+          else
+            echo "CI notebook config not found, using default"
+            NOTEBOOK="MLFLOW.ipynb"
+          fi
+          
+          # Debug: check if the notebook exists
+          if docker exec nbtest test -f "$NOTEBOOK"; then
+            echo "Notebook file $NOTEBOOK exists"
+          else
+            echo "ERROR: Notebook file $NOTEBOOK does not exist"
+            docker exec nbtest ls -la
+          fi
+          
+          # Run the notebook
+          echo "Executing notebook: $NOTEBOOK"
+          docker exec -e CI=true nbtest \
             jupyter nbconvert \
               --to notebook \
-              --execute MLFLOW.ipynb \
+              --execute "$NOTEBOOK" \
               --output executed.ipynb \
               --ExecutePreprocessor.timeout=600
-
-          # tear down
+          
+          # Copy the executed notebook out for inspection
+          docker cp nbtest:executed.ipynb ./
+          
+          # Tear down
           docker stop nbtest

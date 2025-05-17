@@ -1,7 +1,31 @@
 #!/bin/bash
 # Create a CI version of the notebook and run the preparation script
-chmod +x prepare_ci_notebook.sh
-chmod +x start
+set -x  # Print each command as it's executed (for debugging)
+echo "Starting CI preparation in $(pwd)"
+ls -la  # List files for debugging
 
+# Make sure scripts are executable
+if [ -f "prepare_ci_notebook.sh" ]; then
+    chmod +x prepare_ci_notebook.sh
+    ./prepare_ci_notebook.sh
+else
+    echo "ERROR: prepare_ci_notebook.sh not found!"
+    ls -la
+fi
 
-./prepare_ci_notebook.sh
+# Check if CI notebook was created
+if [ -f "CI_MLFLOW.ipynb" ]; then
+    echo "SUCCESS: CI_MLFLOW.ipynb was created"
+else
+    echo "ERROR: CI_MLFLOW.ipynb was not created"
+fi
+
+# Check if config file was created
+if [ -f ".ci_notebook_config" ]; then
+    echo "SUCCESS: .ci_notebook_config was created"
+    cat .ci_notebook_config
+else
+    echo "ERROR: .ci_notebook_config was not created"
+fi
+
+echo "CI preparation complete"
