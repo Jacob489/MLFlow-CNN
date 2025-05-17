@@ -54,9 +54,9 @@ jobs:
           echo "Creating demo data directory:"
           docker exec nbtest bash -c "mkdir -p \$HOME/demo_astrodata"
           
-          # Create tiny datasets directly
-          echo "Creating minimal synthetic datasets directly:"
-          docker exec nbtest bash -c "python -c \"
+          # Create tiny datasets directly - in a separate file to avoid YAML issues
+          echo "Creating minimal synthetic datasets:"
+          cat > create_datasets.py << 'EOF'
 import h5py
 import numpy as np
 import os
@@ -77,7 +77,11 @@ create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_training_with_morphology.
 create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_validation_with_morphology.hdf5'), 4)
 create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_testing_with_morphology.hdf5'), 4)
 print('Datasets created successfully')
-\""
+EOF
+          
+          # Copy and run the Python script in the container
+          docker cp create_datasets.py nbtest:/tmp/
+          docker exec nbtest python /tmp/create_datasets.py
           
           # Create marker file
           docker exec nbtest bash -c "touch \$HOME/.ci_mode"
