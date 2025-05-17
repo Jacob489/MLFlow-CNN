@@ -1,3 +1,7 @@
 #!/bin/bash
-# Create a special CI flag file
-touch .ci_environment
+# Create a CI version of the notebook and run the preparation script
+chmod +x prepare_ci_notebook.sh
+chmod +x start
+
+
+./prepare_ci_notebook.sh
