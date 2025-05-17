@@ -33,7 +33,7 @@ GalaxiesML is a machine learning-ready dataset of galaxy images, photometry, red
 GalaxiesML dataset link: https://zenodo.org/records/11117528
 
 
-# Note for US-RSE 2025 reviewers:
+## Note for US-RSE 2025 reviewers:
 
 repo2docker Compatibility:
 
