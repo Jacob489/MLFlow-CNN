@@ -27,6 +27,11 @@ This notebook provides a complete, reproducible pipeline for training, evaluatin
 ## Keywords
 Galaxy Redshift Estimation, Convolutional Neural Networks, Deep Learning, MLflow, Machine Learning, Astrophysics, Photometry, TensorFlow
 
+## Galaxies ML:
+GalaxiesML is a machine learning-ready dataset of galaxy images, photometry, redshifts, and structural parameters. It is designed for machine learning applications in astrophysics, particularly for tasks such as redshift estimation and galaxy morphology classification. The dataset comprises **286,401 galaxy images** from the Hyper-Suprime-Cam (HSC) Survey PDR2 in five filters: g, r, i, z, y, with spectroscopically confirmed redshifts as ground truth.
+
+GalaxiesML dataset link: https://zenodo.org/records/11117528
+
 # Table of Contents
 
 - [System Requirements](#system-requirements)
