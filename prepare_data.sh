@@ -1,3 +1,6 @@
+#!/bin/bash
+# Script to download and prepare a subset of galaxy data for CI environments
+
 # Create a dedicated directory for test data
 mkdir -p demo_astrodata
 
