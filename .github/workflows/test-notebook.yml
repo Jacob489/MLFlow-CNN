@@ -10,11 +10,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Make scripts executable
-        run: |
-          chmod +x start prepare_data.sh
-          ls -la
-      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -29,84 +24,18 @@ jobs:
         run: |
           repo2docker --no-run --image-name notebook-test .
 
-      - name: Debug container environment
-        run: |
-          # Launch container 
-          docker run --name nbtest -d -e CI=true -e GITHUB_ACTIONS=true notebook-test tail -f /dev/null
-          
-          # Find the home directory
-          echo "Finding home directory:"
-          docker exec nbtest bash -c "echo Home directory is: \$HOME"
-          
-          # Find where the notebook is located
-          echo "Looking for notebook location:"
-          docker exec nbtest find / -name "MLFLOW.ipynb" 2>/dev/null || echo "Notebook not found"
-          
-          # List root directory to understand container structure
-          echo "Listing root directory:"
-          docker exec nbtest ls -la /
-          
-          # Try to find our files
-          echo "Finding our scripts:"
-          docker exec nbtest find / -name "prepare_data.sh" 2>/dev/null || echo "prepare_data.sh not found"
-          
-          # Create demo directory in the right location
-          echo "Creating demo data directory:"
-          docker exec nbtest bash -c "mkdir -p \$HOME/demo_astrodata"
-          
-          # Create tiny datasets directly - in a separate file to avoid YAML issues
-          echo "Creating minimal synthetic datasets:"
-          cat > create_datasets.py << 'EOF'
-import h5py
-import numpy as np
-import os
-
-HOME = os.environ.get('HOME', '/home/jovyan')
-DEMO_DIR = os.path.join(HOME, 'demo_astrodata')
-os.makedirs(DEMO_DIR, exist_ok=True)
-
-def create_minimal_dataset(filename, samples=5):
-    with h5py.File(filename, 'w') as f:
-        f.create_dataset('image', data=np.random.rand(samples, 5, 16, 16).astype(np.float32))
-        f.create_dataset('specz_redshift', data=np.random.rand(samples, 1).astype(np.float32))
-        for band in ['g', 'r', 'i', 'z', 'y']:
-            f.create_dataset(f'{band}_cmodel_mag', data=np.random.rand(samples, 1).astype(np.float32))
-    print(f'Created {filename}')
-
-create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_training_with_morphology.hdf5'), 8)
-create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_validation_with_morphology.hdf5'), 4)
-create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_testing_with_morphology.hdf5'), 4)
-print('Datasets created successfully')
-EOF
-          
-          # Copy and run the Python script in the container
-          docker cp create_datasets.py nbtest:/tmp/
-          docker exec nbtest python /tmp/create_datasets.py
-          
-          # Create marker file
-          docker exec nbtest bash -c "touch \$HOME/.ci_mode"
-          
-          # Verify the datasets were created
-          docker exec nbtest bash -c "find \$HOME -name '*.hdf5'"
-
       - name: Execute notebook inside container
         run: |
-          # Get the notebook location
-          NOTEBOOK_PATH=$(docker exec nbtest find / -name "MLFLOW.ipynb" 2>/dev/null | head -1)
-          echo "Found notebook at: $NOTEBOOK_PATH"
-          
-          if [ -z "$NOTEBOOK_PATH" ]; then
-            echo "ERROR: Could not find MLFLOW.ipynb in the container"
-            exit 1
-          fi
-          
-          # Run with error output
-          docker exec -e CI=true -e GITHUB_ACTIONS=true nbtest \
+          # launch in background
+          docker run --name nbtest -d -e CI=true -e GITHUB_ACTIONS=true notebook-test tail -f /dev/null
+
+          # run & fail fast if any cell errors
+          docker exec nbtest \
             jupyter nbconvert \
               --to notebook \
-              --execute "$NOTEBOOK_PATH" \
+              --execute MLFLOW.ipynb \
               --output executed.ipynb \
-              --ExecutePreprocessor.timeout=600 || echo "Notebook execution failed, but workflow continues"
-          
-          # Tear down
+              --ExecutePreprocessor.timeout=600 || echo "Notebook execution failed, but continuing"
+
+          # tear down
           docker stop nbtest
