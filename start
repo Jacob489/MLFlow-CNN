@@ -1,0 +1,6 @@
+#!/bin/bash
+# Make scripts executable 
+chmod +x prepare_data.sh
+
+# Run the data preparation script
+./prepare_data.sh
