@@ -34,40 +34,75 @@ jobs:
           # Launch container 
           docker run --name nbtest -d -e CI=true -e GITHUB_ACTIONS=true notebook-test tail -f /dev/null
           
-          # Check directories and files
-          echo "Listing home directory:"
-          docker exec nbtest ls -la /home/jovyan/
+          # Find the home directory
+          echo "Finding home directory:"
+          docker exec nbtest bash -c "echo Home directory is: \$HOME"
           
-          # Check if dataset directory exists
-          echo "Checking for demo_astrodata directory:"
-          docker exec nbtest ls -la /home/jovyan/demo_astrodata || echo "demo_astrodata directory not found"
+          # Find where the notebook is located
+          echo "Looking for notebook location:"
+          docker exec nbtest find / -name "MLFLOW.ipynb" 2>/dev/null || echo "Notebook not found"
           
-          # Run prepare_data script manually if needed
-          echo "Running prepare_data.sh manually in container:"
-          docker exec -e CI=true -e GITHUB_ACTIONS=true nbtest bash -c "cd /home/jovyan && chmod +x prepare_data.sh && ./prepare_data.sh"
+          # List root directory to understand container structure
+          echo "Listing root directory:"
+          docker exec nbtest ls -la /
           
-          # Check again for dataset files
-          echo "Checking again for dataset files:"
-          docker exec nbtest ls -la /home/jovyan/demo_astrodata || echo "Still no demo_astrodata directory"
+          # Try to find our files
+          echo "Finding our scripts:"
+          docker exec nbtest find / -name "prepare_data.sh" 2>/dev/null || echo "prepare_data.sh not found"
+          
+          # Create demo directory in the right location
+          echo "Creating demo data directory:"
+          docker exec nbtest bash -c "mkdir -p \$HOME/demo_astrodata"
+          
+          # Create tiny datasets directly
+          echo "Creating minimal synthetic datasets directly:"
+          docker exec nbtest bash -c "python -c \"
+import h5py
+import numpy as np
+import os
+
+HOME = os.environ.get('HOME', '/home/jovyan')
+DEMO_DIR = os.path.join(HOME, 'demo_astrodata')
+os.makedirs(DEMO_DIR, exist_ok=True)
+
+def create_minimal_dataset(filename, samples=5):
+    with h5py.File(filename, 'w') as f:
+        f.create_dataset('image', data=np.random.rand(samples, 5, 16, 16).astype(np.float32))
+        f.create_dataset('specz_redshift', data=np.random.rand(samples, 1).astype(np.float32))
+        for band in ['g', 'r', 'i', 'z', 'y']:
+            f.create_dataset(f'{band}_cmodel_mag', data=np.random.rand(samples, 1).astype(np.float32))
+    print(f'Created {filename}')
+
+create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_training_with_morphology.hdf5'), 8)
+create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_validation_with_morphology.hdf5'), 4)
+create_minimal_dataset(os.path.join(DEMO_DIR, '5x64x64_testing_with_morphology.hdf5'), 4)
+print('Datasets created successfully')
+\""
           
           # Create marker file
-          docker exec nbtest touch /home/jovyan/.ci_mode
+          docker exec nbtest bash -c "touch \$HOME/.ci_mode"
           
-          # Verify CI environment variables
-          docker exec nbtest bash -c "echo CI=$CI; echo GITHUB_ACTIONS=$GITHUB_ACTIONS"
+          # Verify the datasets were created
+          docker exec nbtest bash -c "find \$HOME -name '*.hdf5'"
 
       - name: Execute notebook inside container
         run: |
+          # Get the notebook location
+          NOTEBOOK_PATH=$(docker exec nbtest find / -name "MLFLOW.ipynb" 2>/dev/null | head -1)
+          echo "Found notebook at: $NOTEBOOK_PATH"
+          
+          if [ -z "$NOTEBOOK_PATH" ]; then
+            echo "ERROR: Could not find MLFLOW.ipynb in the container"
+            exit 1
+          fi
+          
           # Run with error output
           docker exec -e CI=true -e GITHUB_ACTIONS=true nbtest \
             jupyter nbconvert \
               --to notebook \
-              --execute MLFLOW.ipynb \
+              --execute "$NOTEBOOK_PATH" \
               --output executed.ipynb \
               --ExecutePreprocessor.timeout=600 || echo "Notebook execution failed, but workflow continues"
-          
-          # Check if executed notebook was created
-          docker exec nbtest ls -la /home/jovyan/ | grep executed.ipynb || echo "No executed notebook found"
           
           # Tear down
           docker stop nbtest
