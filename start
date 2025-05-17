@@ -1,6 +1,25 @@
 #!/bin/bash
-# Make scripts executable 
+# repo2docker looks specifically for 'start' file to execute at startup
+set -e  # Exit immediately if a command fails
+set -x  # Print each command before executing it
+
+echo "Starting setup from $(pwd)"
+
+# Make script executable - be very explicit
 chmod +x prepare_data.sh
+
+# Set environment variables explicitly
+export CI=true
+export GITHUB_ACTIONS=true
 
 # Run the data preparation script
 ./prepare_data.sh
+
+# Create marker file as backup
+touch .ci_mode
+
+# Double check that files exist
+echo "Checking if dataset files were created:"
+ls -la demo_astrodata/
+
+echo "Setup complete"
