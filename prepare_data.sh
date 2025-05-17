@@ -1,7 +1,4 @@
-#!/bin/bash
-# Script to download and prepare a subset of galaxy data for CI environments
-
-# Create directories
+# Create a dedicated directory for test data
 mkdir -p demo_astrodata
 
 # If running in CI environment, prepare the data
@@ -9,7 +6,7 @@ if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ] || [ -n "$BINDER_SERVICE_HOST" ]; th
     echo "CI environment detected - downloading minimal dataset..."
     
     # Install requirements
-    pip install requests tqdm h5py
+    pip install requests tqdm
     
     # Download the smaller testing dataset (3.4GB)
     cd demo_astrodata
