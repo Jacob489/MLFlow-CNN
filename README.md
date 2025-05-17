@@ -32,6 +32,22 @@ GalaxiesML is a machine learning-ready dataset of galaxy images, photometry, red
 
 GalaxiesML dataset link: https://zenodo.org/records/11117528
 
+
+## Note for US-RSE 2025 reviewers:
+
+repo2docker Compatibility:
+
+Despite GitHub Actions CI environments providing 16GB of RAM for public repositories (which should theoretically be sufficient), our CNN training workflow consistently encounters memory limitations (exit code 137) when executed through repo2docker. After extensive investigation, we've identified several contributing factors:
+
+1. Docker container overhead: Docker itself consumes memory resources that reduce available RAM for computation
+2. TensorFlow memory allocation behavior: TensorFlow often reserves large memory blocks at initialization, beyond immediate needs
+3. HDF5 file handling: Processing our 3.4GB astronomical datasets requires significant memory for buffering and preprocessing
+4. Build-time vs. runtime memory: repo2docker's environment setup consumes substantial memory before notebook execution begins
+
+We've attempted multiple optimization strategies including reduced batch sizes, fewer epochs, and memory-efficient data handling, but the combination of these factors still exceeds available resources in the containerized CI environment.
+
+For successful reproduction, we provide comprehensive setup instructions in the README for running on systems where memory allocation can be more directly controlled. The environment.yml file ensures consistent dependency installation across platforms.
+
 # Table of Contents
 
 - [System Requirements](#system-requirements)
