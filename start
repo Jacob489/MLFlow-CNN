@@ -1,6 +1,3 @@
 #!/bin/bash
-# Make scripts executable 
-chmod +x prepare_data.sh
-
-# Run the data preparation script
-./prepare_data.sh
+# Create a special CI flag file
+touch .ci_environment
