@@ -37,9 +37,9 @@ GalaxiesML dataset link: https://zenodo.org/records/11117528
 
 ### repo2docker and CI Compatibility Status:
 
-I've built a reproducible ML pipeline that handles automated environment setup, data acquisition, and dependency management. The training pipeline hits some technical roadblocks in containerized CI environments though:
+Our reproducible ML pipeline demonstrates the core principles of reproducible research through automated environment setup, data acquisition, and dependency management. However, the full training pipeline currently encounters technical incompatibilities in containerized CI environments:
 
-**✅ What works:**
+**✅ What works reliably:**
 - Automated environment setup and dependency installation
 - Data download and preprocessing pipeline (`prepare_data.sh`)
 - MLflow experiment tracking initialization  
@@ -47,26 +47,26 @@ I've built a reproducible ML pipeline that handles automated environment setup, 
 - Pipeline structure and organization
 
 **❌ Current CI execution status:**
-The training notebook doesn't complete in CI environments due to:
+The training notebook does not currently complete successfully in CI environments due to:
 
-1. **Model-environment incompatibility**: The CNN architecture expects GPU-optimized tensor operations that don't work with CPU-only CI environments, particularly around convolution and pooling operations.
+1. **Model-environment incompatibility**: The CNN architecture expects GPU-optimized tensor operations that are incompatible with CPU-only CI environments, specifically around convolution and pooling operations.
 
-2. **Data format mismatches**: Tensor shapes and formats expected by the model vs. what CI environments can handle.
+2. **Data format mismatches**: Tensor shape and format expectations between the model design and CI environment capabilities.
 
-3. **Resource constraints**: Memory and computational limits in containerized environments.
+3. **Resource constraints**: Memory and computational limitations in containerized environments.
 
-**What this shows about reproducibility:**
-Even though training doesn't finish in CI, the reproducible research infrastructure works:
+**Reproducibility framework value:**
+While the training doesn't complete in CI, we've successfully demonstrated the reproducible research infrastructure:
 - Automated environment creation
 - Dependency management via `environment.yml`
 - Automated data acquisition and setup
 - Clear documentation and structure
-- Version control and containerization
+- Version control and containerization principles
 
-**For actual reproduction:**
-The pipeline runs in GPU-enabled environments with sufficient computational resources. The reproducibility framework ensures consistent setup across different systems, though the model architecture has hardware requirements that exceed CI capabilities.
+**For successful reproduction:**
+The pipeline is designed to run in GPU-enabled environments with sufficient computational resources. The reproducibility framework ensures consistent setup across different systems, even though the current model architecture has specific hardware requirements that exceed CI capabilities.
 
-This reflects real challenges in reproducible research - computational workflows often need specific hardware while you can still validate the reproducible framework itself.
+This approach reflects real-world reproducible research challenges where full computational workflows may require specific hardware while maintaining automated validation of the reproducible framework itself.
 
 # Table of Contents
 
