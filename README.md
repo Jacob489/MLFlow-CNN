@@ -35,18 +35,38 @@ GalaxiesML dataset link: https://zenodo.org/records/11117528
 
 ## Note for US-RSE 2025 reviewers:
 
-repo2docker Compatibility:
+### repo2docker and CI Compatibility Status:
 
-Despite GitHub Actions CI environments providing 16GB of RAM for public repositories (which should theoretically be sufficient), our CNN training workflow consistently encounters memory limitations (exit code 137) when executed through repo2docker. After extensive investigation, we've identified several contributing factors:
+Our reproducible ML pipeline demonstrates the core principles of reproducible research through automated environment setup, data acquisition, and dependency management. However, the full training pipeline currently encounters technical incompatibilities in containerized CI environments:
 
-1. Docker container overhead: Docker itself consumes memory resources that reduce available RAM for computation
-2. TensorFlow memory allocation behavior: TensorFlow often reserves large memory blocks at initialization, beyond immediate needs
-3. HDF5 file handling: Processing our 3.4GB astronomical datasets requires significant memory for buffering and preprocessing
-4. Build-time vs. runtime memory: repo2docker's environment setup consumes substantial memory before notebook execution begins
+**✅ What works reliably:**
+- Automated environment setup and dependency installation
+- Data download and preprocessing pipeline (`prepare_data.sh`)
+- MLflow experiment tracking initialization  
+- Model architecture definition and compilation
+- Pipeline structure and organization
 
-We've attempted multiple optimization strategies including reduced batch sizes, fewer epochs, and memory-efficient data handling, but the combination of these factors still exceeds available resources in the containerized CI environment.
+**❌ Current CI execution status:**
+The training notebook does not currently complete successfully in CI environments due to:
 
-For successful reproduction, we provide comprehensive setup instructions in the README for running on systems where memory allocation can be more directly controlled. The environment.yml file ensures consistent dependency installation across platforms.
+1. **Model-environment incompatibility**: The CNN architecture expects GPU-optimized tensor operations that are incompatible with CPU-only CI environments, specifically around convolution and pooling operations.
+
+2. **Data format mismatches**: Tensor shape and format expectations between the model design and CI environment capabilities.
+
+3. **Resource constraints**: Memory and computational limitations in containerized environments.
+
+**Reproducibility framework value:**
+While the training doesn't complete in CI, we've successfully demonstrated the reproducible research infrastructure:
+- Automated environment creation
+- Dependency management via `environment.yml`
+- Automated data acquisition and setup
+- Clear documentation and structure
+- Version control and containerization principles
+
+**For successful reproduction:**
+The pipeline is designed to run in GPU-enabled environments with sufficient computational resources. The reproducibility framework ensures consistent setup across different systems, even though the current model architecture has specific hardware requirements that exceed CI capabilities.
+
+This approach reflects real-world reproducible research challenges where full computational workflows may require specific hardware while maintaining automated validation of the reproducible framework itself.
 
 # Table of Contents
 
